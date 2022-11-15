@@ -2,16 +2,28 @@
 
 import { env as public_env} from '$env/dynamic/public'
 
-let message = "";
+const getData = async () =>{
+    const r = await fetch(public_env.PUBLIC_URL_API+'test',{
+        method: 'GET',
+        headers:{
+            "Accept":"application/json"
+        }
+    });
+    if(r.ok === true){
+        return r.json();
+    }
+    throw 'Erreur lors du chargement.';
+}
 
-fetch(public_env.PUBLIC_URL_API+'test',{
-  method: 'GET',
-})
-  .then((response) => response.json())
-  .then((data) => message = data.message);
-    
+let messagePromise = getData();
+
 </script>
 
 <h1>about</h1>
-
-<p>{message}</p>
+{#await messagePromise}
+	<h2>Loading....</h2>
+{:then message}
+	<h2>{message.message}</h2>
+{:catch err}
+	<h2>{err}</h2>
+{/await}
