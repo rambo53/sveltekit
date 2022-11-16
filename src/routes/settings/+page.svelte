@@ -1,14 +1,14 @@
 <script>
-
-fetch('http://127.0.0.1:5000',{
-  method: 'GET',
-})
-  .then((response) => response.json())
-  .then((data) => console.log(data));
+    export let data
+    let message1 = data.message1;
+    let message2 = data.message2;
 
 </script>
 
-<h1>settings</h1>
+<h1>multiple fetch</h1>
+
+<p>{ message1.message }</p>
+<p>{ message2.message }</p>
 
 <form method="POST" action="/about">
     <input name="text" type="text">
