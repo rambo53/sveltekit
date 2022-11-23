@@ -1,6 +1,9 @@
 import { env as public_env} from '$env/dynamic/public';
 import { redirect } from '@sveltejs/kit';
 
+// utilisation en ssr impossible de stocker les cookies pour envoie api
+
+/*
 export const actions = {
     auth: async ({ request}) =>{
         const formdata = await request.formData();
@@ -21,3 +24,4 @@ export const actions = {
         throw redirect(307, '/');
     }
 }
+*/
