@@ -1,5 +1,7 @@
 <script>
-    import { env as public_env} from '$env/dynamic/public'
+    import { env as public_env} from '$env/dynamic/public';
+    import { goto } from '$app/navigation';
+    import { userStore } from '../../store.js';
 
     const checkForm = async () => {
         const form = document.getElementById('formAuth');
@@ -21,10 +23,11 @@
         let data = await r.json();
         if(data.status==200){
             console.log("ok auth");
-            document.cookie = "token="+data.token;
-            document.cookie = "admin=true";
-            console.log(document.cookie)
+            userStore.update(($u) => $u = { role: 'admin', token: data.token })
+            console.log($userStore)
+
             form.reset();
+            goto("/");
         }
     }
 </script>
